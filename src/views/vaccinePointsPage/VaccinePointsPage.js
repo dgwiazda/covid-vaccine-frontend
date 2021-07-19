@@ -12,6 +12,7 @@ import styled from 'styled-components'
 import {Button} from "react-bootstrap";
 import VaccinePointsService from "./services/VaccinePointsService";
 import VaccinePointsTable from "./components/VaccinePointsTable";
+import StatisticsService from "../statisticsPage/services/StatisticsService";
 
 const Styles = styled.div`
 
@@ -123,6 +124,14 @@ const Styles = styled.div`
     margin-left: 3vw;
     color: white;
   }
+  
+  p#source-info {
+    margin: 20px 0 30px 30px;
+    
+    b {
+      color: darkcyan;
+    }
+  }
 
 `;
 
@@ -135,6 +144,13 @@ function VaccinePointsPage() {
     const [selected, setSelected] = useState(null);
     const [vaccinePoints, setVaccinePoints] = useState([]);
     const [townInput, setTownInput] = useState("");
+    const [updateDateTime, setUpdateDateTime] = useState("");
+
+    useEffect(() => {
+        StatisticsService.getUpdateDateTime().then(response => {
+            convertDate(response.data);
+        });
+    }, []);
 
     // runs while searching for town for table
     useEffect(() => {
@@ -199,6 +215,14 @@ function VaccinePointsPage() {
         ],
         []
     );
+
+    // converts date to YYYY-MM-DD HH-mm
+    const convertDate = (date) => {
+        let tempDate = "";
+        tempDate += date.substr(0, 10); //date
+        tempDate += " " + date.substr(11, 5); //time
+        setUpdateDateTime(tempDate);
+    }
 
     // choosen towns markers on map data
     const markers = [
@@ -671,6 +695,12 @@ function VaccinePointsPage() {
             <div id="table-div">
                 <VaccinePointsTable columns={columns} data={vaccinePoints}/>
             </div>
+
+            {/*  --------------------- SOURCE -------------------------*/}
+            <p id="source-info">
+                <b>Źródło:</b> Ministerstwo Zdrowia<br/>
+                <b>Data aktualizacji:</b> {updateDateTime}
+            </p>
         </Styles>
     );
 }
