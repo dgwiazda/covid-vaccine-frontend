@@ -36,11 +36,16 @@ const VaccineInfoStyles = styled.div`
     
     h3 {
       font-weight: 700;
+      color: darkcyan;
     }
     
     p {
       font-size: large;
     }
+  }
+  
+  b {
+    color: darkcyan;
   }
 
   p#source-info {

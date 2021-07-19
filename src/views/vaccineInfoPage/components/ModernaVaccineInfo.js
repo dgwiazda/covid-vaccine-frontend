@@ -182,7 +182,10 @@ function ModernaVaccineInfo() {
                 </div>
                 :
                 ""}
-            <p id="source-info">Źródło: Ministerstwo Zdrowia<br/>Data aktualizacji: 17.03.2021</p>
+            <p id="source-info">
+                <b>Źródło:</b> Ministerstwo Zdrowia<br/>
+                <b>Data aktualizacji:</b> 17.03.2021
+            </p>
         </VaccineInfoStyles>
     );
 }
