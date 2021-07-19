@@ -246,17 +246,13 @@ function StatisticsPage() {
 
     // runs at start
     useEffect(() => {
-        StatisticsService.getVaccinesDateByProvince(vaccinesProvince).then(response => {
-            setVaccinesLabels(response.data);
-        });
         StatisticsService.getVaccinesCountByprovince(vaccinesProvince).then(response => {
-            setVaccinesData(response.data);
-        });
-        StatisticsService.getInfectionsDateByProvince(infectionsProvince).then(response => {
-            setInfectionsDeathsLabels(response.data);
+            setVaccinesData(response.data.data);
+            setVaccinesLabels(response.data.time);
         });
         StatisticsService.getInfectionsByProvince(infectionsProvince, false).then(response => {
-            setInfectionsDeathsData(response.data);
+            setInfectionsDeathsData(response.data.data);
+            setInfectionsDeathsLabels(response.data.time);
         });
         StatisticsService.getVaccinesCount().then(response => {
             setVaccinesCount(response.data);
@@ -386,8 +382,8 @@ function StatisticsPage() {
             convertDate(response.data);
         });
         StatisticsService.getPredictedInfections(predictedInfectionsProvince).then(response => {
-            setPredictedInfectionsData(response.data.infections);
-            setPredictedInfectionsLabels(response.data.dates);
+            setPredictedInfectionsData(response.data.data);
+            setPredictedInfectionsLabels(response.data.time);
         });
     }, [])
 
@@ -395,11 +391,11 @@ function StatisticsPage() {
     useEffect(() => {
         if (showDeaths) {
             StatisticsService.getInfectionsByProvince(infectionsProvince, true).then(response => {
-                setInfectionsDeathsData(response.data);
+                setInfectionsDeathsData(response.data.data);
             })
         } else {
             StatisticsService.getInfectionsByProvince(infectionsProvince, false).then(response => {
-                setInfectionsDeathsData(response.data);
+                setInfectionsDeathsData(response.data.data);
             })
         }
     }, [showDeaths, infectionsProvince])
@@ -407,15 +403,15 @@ function StatisticsPage() {
     // runs while switching province on vaccines chart
     useEffect(() => {
         StatisticsService.getVaccinesCountByprovince(vaccinesProvince).then(response => {
-            setVaccinesData(response.data);
+            setVaccinesData(response.data.data);
         })
     }, [vaccinesProvince])
 
     // runs while switching province on predictions chart
     useEffect(() => {
         StatisticsService.getPredictedInfections(predictedInfectionsProvince).then(response => {
-            setPredictedInfectionsLabels(response.data.dates);
-            setPredictedInfectionsData(response.data.infections);
+            setPredictedInfectionsData(response.data.data);
+            setPredictedInfectionsLabels(response.data.time);
         })
     }, [predictedInfectionsProvince])
 

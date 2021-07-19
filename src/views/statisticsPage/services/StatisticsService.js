@@ -16,10 +16,6 @@ class StatisticsService {
         return axios.get(infectionsUrl + "count/province/" + province + "/deaths/" + deaths);
     }
 
-    getInfectionsDateByProvince(province) {
-        return axios.get(infectionsUrl + "date/" + province);
-    }
-
     getNopCount() {
         return axios.get(nopUrl + "count");
     }
@@ -37,10 +33,6 @@ class StatisticsService {
     }
     getVaccinesCountByprovince(province) {
         return axios.get(vaccinesUrl + "count/" + province);
-    }
-
-    getVaccinesDateByProvince(province) {
-        return axios.get(vaccinesUrl + "date/" + province);
     }
 
     getVaccinesCount() {
