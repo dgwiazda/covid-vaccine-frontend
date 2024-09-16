@@ -137,7 +137,7 @@ const Styles = styled.div`
 
 // for map
 const googleMapURL = "https://maps.googleapis.com/maps/api/js?key=" +
-    "AIzaSyCdul0als7SOcOJNio3DVEoQy26S9N1Nlc";
+    "{apiKey}";
 
 function VaccinePointsPage() {
     const [count, setCount] = useState(0);
